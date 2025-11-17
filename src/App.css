@@ -1,0 +1,61 @@
+/* 
+
+techshop/
+│
+├── public/
+│   └── favicon.ico
+│
+├── src/
+│   ├── assets/
+│   │   └── images/
+│   │       └── banner.png
+│   │       └── products/
+│   │
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── Loader.jsx
+│   │   └── ProtectedRoute.jsx
+│   │
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Products.jsx
+│   │   ├── ProductDetails.jsx
+│   │   ├── Cart.jsx
+│   │   ├── Checkout.jsx
+│   │   ├── Login.jsx
+│   │   └── Signup.jsx
+│   │
+│   ├── context/
+│   │   ├── AuthContext.jsx
+│   │   └── CartContext.jsx
+│   │
+│   ├── hooks/
+│   │   └── useFetch.js
+│   │
+│   ├── layouts/
+│   │   └── MainLayout.jsx
+│   │
+│   ├── services/
+│   │   ├── api.js
+│   │   └── productService.js
+│   │
+│   ├── utils/
+│   │   └── formatPrice.js
+│   │
+│   ├── router/
+│   │   └── AppRouter.jsx
+│   │
+│   ├── styles/
+│   │   └── global.css
+│   │
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── .gitignore
+├── package.json
+└── vite.config.js
+
+*/
