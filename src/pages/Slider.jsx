@@ -97,7 +97,7 @@ export default function Slider() {
             </div>
 
             {/* Dots */}
-            <div className="flex justify-center mt-6 gap-2">
+            <div className="flex justify-center mt-6 gap-4">
                 {Array.from({ length: sliderItems.length }).map((_, i) => (
                     <span
                         key={i}
