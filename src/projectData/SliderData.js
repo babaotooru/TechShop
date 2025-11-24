@@ -24,7 +24,7 @@ const SliderData = [
     tagline: "Give your favourite music a boost.",
     finalPrice: 13489,
     originalPrice: 19990,
-    images: "/images/products/sonyxb910n-1.png",
+    images: "/images/products/sonyXb910n-1.png",
   },
   {
     id: 8,

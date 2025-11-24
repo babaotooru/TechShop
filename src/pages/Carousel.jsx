@@ -10,11 +10,11 @@ export default function Carousel() {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 1200,
+        speed: 1000,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3500,
+        autoplaySpeed: 3000,
         pauseOnHover: false,
         cssEase: "ease-in-out",
         appendDots: dots => (
@@ -23,36 +23,34 @@ export default function Carousel() {
             </div>
         ),
         customPaging: () => (
-            <div className="w-3 h-3 bg-gray-500 rounded-full hover:bg-red-600 transition-all"></div>
+            <div className="w-3 h-3 bg-gray-500 rounded-full hover:bg-red-500 transition-all"></div>
         )
     };
 
     return (
         <div className="w-full bg-black py-16 overflow-hidden">
-
             <Slider {...settings}>
                 {SliderData.map((item) => (
-                    <div key={item.id} className="relative min-h-[500px] md:min-h-[650px]">
+                    <div key={item.id} className="relative px-4 min-h-[600px]">
 
-                        {/* Background Big Text */}
-                        <div className="
+                        {/* BACKGROUND BIG TEXT */}
+                        <h2 className="
                             absolute inset-0 flex items-center justify-center
-                            text-white/5 font-extrabold
+                            text-white/5 font-extrabold uppercase
                             text-[6rem] md:text-[12rem] lg:text-[16rem]
-                            tracking-widest select-none pointer-events-none
+                            select-none pointer-events-none tracking-widest
                         ">
                             {item.type}
-                        </div>
+                        </h2>
 
-                        {/* Foreground Content */}
+                        {/* MAIN CONTENT */}
                         <div className="
-                            max-w-7xl mx-auto px-6 py-10
-                            flex flex-col md:flex-row items-center justify-between
-                            relative z-10
+                            max-w-7xl mx-auto flex flex-col md:flex-row 
+                            items-center justify-between py-10 relative z-10
                         ">
 
-                            {/* LEFT SIDE */}
-                            <div className="w-full md:w-1/2 space-y-4">
+                            {/* LEFT TEXT */}
+                            <div className="w-full md:w-1/2 space-y-4 px-4">
                                 <h1 className="text-4xl md:text-6xl font-bold text-white">
                                     {item.title}
                                 </h1>
@@ -61,39 +59,38 @@ export default function Carousel() {
                                     {item.tagline}
                                 </p>
 
-                                <div className="text-2xl md:text-3xl font-bold text-white">
+                                <h3 className="text-2xl md:text-3xl font-bold text-white">
                                     ₹{item.finalPrice}
-                                    <span className="ml-4 text-gray-400 line-through">
+                                    <span className="ml-4 text-gray-500 line-through text-lg">
                                         ₹{item.originalPrice}
                                     </span>
-                                </div>
+                                </h3>
 
                                 <Link to={`/product/${item.id}`}>
                                     <button className="
-                                        bg-red-600 hover:bg-red-700 text-white
-                                        px-6 py-3 rounded-md font-bold
-                                        shadow-lg transition-all
+                                        bg-red-600 hover:bg-red-700 text-white 
+                                        px-6 py-3 rounded-md font-bold shadow-lg 
+                                        transition-all
                                     ">
                                         Shop Now
                                     </button>
                                 </Link>
                             </div>
 
-                            {/* RIGHT SIDE IMAGE */}
-                            <div className="w-full md:w-[45%] flex justify-center md:justify-end mt-10 md:mt-0">
+                            {/* RIGHT IMAGE */}
+                            <div className="w-full md:w-[45%] flex justify-center md:justify-end">
                                 <img
-                                    src={item.images}  // IMPORTANT FIX
+                                    src={item.images}  // Correct (your images are strings)
                                     alt={item.title}
                                     className="
                                         w-full md:h-[520px] h-[340px] object-contain
-                                        drop-shadow-2xl transition-transform
-                                        duration-500 hover:scale-110
+                                        drop-shadow-2xl transition-transform duration-500 
+                                        hover:scale-110
                                     "
                                 />
                             </div>
 
                         </div>
-
                     </div>
                 ))}
             </Slider>
