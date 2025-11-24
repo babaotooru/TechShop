@@ -1,109 +1,122 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-// Load images from PUBLIC folder
-const images = [
-    "/images/products/jbl760nc-1.png",
-    "/images/products/boat203-1.png",
-    "/images/products/boat518-1.png",
-    "/images/products/boat255r-1.png",
-    "/images/products/jbl-endu-1.png",
-    "/images/products/sonyXb910n-1.png",
-    "/images/products/boat131-1.png",
-    "/images/products/jbl660nc-1.png",
+// Slide content
+const slides = [
+    {
+        img: "/images/products/jbl760nc-1.png",
+        title: "JBL Tune 760NC",
+        price: "5,999",
+        old: "7,999",
+    },
+    {
+        img: "/images/products/boat203-1.png",
+        title: "boAt Airdopes 203",
+        price: "1,074",
+        old: "3,999",
+    },
+    {
+        img: "/images/products/boat518-1.png",
+        title: "boAt Rockerz 518",
+        price: "1,299",
+        old: "3,999",
+    },
+    {
+        img: "/images/products/boat255r-1.png",
+        title: "boAt Rockerz 255",
+        price: "899",
+        old: "2,999",
+    },
+    {
+        img: "/images/products/jbl-endu-1.png",
+        title: "JBL Endurance Run",
+        price: "999",
+        old: "1,599",
+    },
 ];
-
-const titles = [
-    "JBL Tune 760NC",
-    "boAt Airdopes 203",
-    "boAt Rockerz 518",
-    "boAt Rockerz 255",
-    "JBL Endurance Run",
-    "Sony WH-XB910N",
-    "boAt Airdopes 131",
-    "JBL Live 660NC",
-];
-
-const prices = ["5999", "1074", "1299", "899", "15999", "13489", "1099", "9999"];
-const oldPrices = ["7999", "3999", "3999", "2999", "27999", "19990", "2990", "14999"];
 
 export default function Slider() {
-    // Duplicate array to create infinite loop
-    const sliderItems = images.map((img, i) => ({
-        img,
-        title: titles[i],
-        price: prices[i],
-        old: oldPrices[i],
-    }));
-
-    const infiniteSlides = [...sliderItems, ...sliderItems, ...sliderItems]; // 3X duplicate
-
     const [index, setIndex] = useState(0);
 
+    // auto sliding
     useEffect(() => {
         const timer = setInterval(() => {
-            setIndex((prev) => prev + 1);
-        }, 2200);
-
+            setIndex((prev) => (prev + 1) % slides.length);
+        }, 2500);
         return () => clearInterval(timer);
     }, []);
 
-    return (
-        <div className="w-full bg-black py-20">
+    // rotating window of 5 items
+    const getVisibleSlides = () => {
+        const result = [];
+        for (let i = 0; i < 5; i++) {
+            result.push(slides[(index + i) % slides.length]);
+        }
+        return result;
+    };
 
-            {/* Heading */}
-            <h1 className="text-center text-white text-3xl md:text-4xl font-semibold mb-12">
+    const visibleSlides = getVisibleSlides();
+
+    return (
+        <div className="w-full bg-black py-20 px-4">
+            {/* Title */}
+            <h1 className="text-center text-white text-3xl md:text-4xl font-semibold mb-10">
                 Featured Products
             </h1>
 
-            {/* Slider wrapper */}
-            <div className="overflow-hidden w-full flex justify-center">
+            {/* Slider Container */}
+            <div className="flex justify-center items-center gap-6 md:gap-10 overflow-hidden">
 
-                <div
-                    className="flex gap-10 transition-transform duration-[1500ms] ease-linear"
-                    style={{
-                        transform: `translateX(-${index * 240}px)`,
-                    }}
-                >
-                    {infiniteSlides.map((item, i) => {
-                        // Find center card: index + 2 (middle of 5 visible)
-                        const centerIndex = index + 2;
-                        const scale = i === centerIndex ? "scale-125" : "scale-100";
+                {visibleSlides.map((item, i) => {
+                    // center index = 2
+                    const isCenter = i === 2;
 
-                        return (
-                            <div
-                                key={i}
-                                className={`bg-neutral-900 p-5 border border-neutral-700 rounded-xl 
-                text-center min-w-[220px] transition-transform duration-500 ${scale}`}
-                            >
-                                <p className="text-white text-sm opacity-80 mb-1">{item.title}</p>
+                    return (
+                        <div
+                            key={i}
+                            className={`
+                text-center transition-all duration-500 
+                ${isCenter ? "scale-150 opacity-100" : "scale-90 opacity-70"}
+                w-[110px] sm:w-[140px] md:w-[160px] lg:w-[200px]
+              `}
+                        >
+                            <p className="text-white text-sm sm:text-base mb-2">
+                                {item.title}
+                            </p>
 
-                                <Link to="/Allproduct">
-                                    <img
-                                        src={item.img}
-                                        alt={item.title}
-                                        className="h-32 object-contain mx-auto hover:scale-110 transition-transform duration-300"
-                                    />
-                                </Link>
+                            <Link to="/Allproduct">
+                                <img
+                                    src={item.img}
+                                    alt={item.title}
+                                    className="
+                    mx-auto object-contain 
+                    h-24 sm:h-28 md:h-32 lg:h-40 
+                    transition-transform duration-300 hover:scale-110
+                  "
+                                />
+                            </Link>
 
-                                <p className="text-white text-lg font-semibold mt-2">
-                                    ₹{item.price}
-                                    <span className="text-gray-500 ml-2 text-sm line-through">₹{item.old}</span>
-                                </p>
-                            </div>
-                        );
-                    })}
-                </div>
+                            <p className="text-white text-base sm:text-lg font-semibold mt-2">
+                                ₹{item.price}
+                                <span className="text-gray-500 ml-2 text-sm line-through">
+                                    ₹{item.old}
+                                </span>
+                            </p>
+                        </div>
+                    );
+                })}
+
             </div>
 
-            {/* Dots */}
-            <div className="flex justify-center mt-6 gap-4">
-                {Array.from({ length: sliderItems.length }).map((_, i) => (
+            {/* Pagination Dots */}
+            <div className="flex justify-center mt-6 gap-3">
+                {slides.map((_, i) => (
                     <span
                         key={i}
                         className={`
-              w-2.5 h-2.5 rounded-full transition-all duration-300
-              ${i === index % sliderItems.length ? "bg-red-600 scale-125" : "bg-gray-500"}
+              w-3 h-3 rounded-full 
+              ${i === index ? "bg-red-600 scale-125" : "bg-gray-500"} 
+              transition-all duration-300
             `}
                     ></span>
                 ))}
