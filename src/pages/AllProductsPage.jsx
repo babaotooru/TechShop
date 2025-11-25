@@ -11,7 +11,7 @@ const ProductCard = ({ item }) => {
     const dispatch = useDispatch();
 
     return (
-        <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-4 transition hover:border-red-600 hover:scale-[1.02] duration-300 relative z-10 ">
+        <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-4 transition hover:border-red-600 hover:scale-[1.02] duration-300 ">
 
             <Link to={`/product/${item.id}`}>
                 <img
@@ -70,7 +70,7 @@ const Sidebar = ({ setSort, filters, setFilters, priceRange, setPriceRange }) =>
     };
 
     return (
-        <div className="w-64 bg-neutral-900 border-r border-neutral-700 p-5 space-y-6 hidden lg:block">
+        <div className="w-full lg:w-64 bg-neutral-900 border-b lg:border-b-0 lg:border-r border-neutral-700 p-5 space-y-6">
 
             {/* SORT */}
             <div>
@@ -158,7 +158,7 @@ const AllProductsPage = () => {
     }, [data, sort, filters, priceRange]);
 
     return (
-        <div className="bg-black min-h-screen text-white flex overflow-y-auto">
+        <div className="bg-black min-h-screen text-white flex flex-col lg:flex-row ">
 
             {/* LEFT SIDEBAR */}
             <Sidebar
