@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
@@ -9,16 +9,31 @@ const Cart = () => {
     const dispatch = useDispatch();
     const { cart } = useSelector((state) => state.cartItems);
 
-    const originalPrice = cart.reduce((acc, item) => acc + item.originalPrice * item.quantity, 0);
-    const finalPrice = cart.reduce((acc, item) => acc + item.finalPrice * item.quantity, 0);
+    // ✅ ALWAYS OPEN CART FROM TOP
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    const originalPrice = cart.reduce(
+        (acc, item) => acc + item.originalPrice * item.quantity,
+        0
+    );
+    const finalPrice = cart.reduce(
+        (acc, item) => acc + item.finalPrice * item.quantity,
+        0
+    );
     const discount = originalPrice - finalPrice;
 
     return (
-        <div className="w-full min-h-screen bg-black text-white px-4 py-6">
+        <div className="w-full min-h-screen bg-black text-white px-4 py-6 pt-14">
+
             {cart.length === 0 ? (
+                /* EMPTY CART */
                 <div className="flex flex-col items-center justify-center mt-10">
                     <BsCartX className="text-red-600 text-[150px] mb-6" />
-                    <h1 className="text-4xl font-bold text-center">Your cart is empty</h1>
+                    <h1 className="text-4xl font-bold text-center">
+                        Your cart is empty
+                    </h1>
 
                     <Link to="/Allproducts" className="mt-8">
                         <button className="bg-red-600 text-white flex items-center gap-4 px-8 py-4 rounded-xl text-2xl font-bold">
@@ -28,45 +43,10 @@ const Cart = () => {
                     </Link>
                 </div>
             ) : (
+                <div className="flex flex-col md:flex-row gap-6 justify-center mt-4">
 
-                <div className="flex flex-col sm:flex-row gap-6 justify-center mt-4">
-
-                    <div className="sm:w-1/3 bg-neutral-800 rounded-lg p-5 h-fit">
-                        <h4 className="text-xl font-bold">
-                            Order Summary ({cart.length} items)
-                        </h4>
-
-                        <div className="mt-6 space-y-3 text-lg">
-                            <div className="flex justify-between">
-                                <p>Original Price</p>
-                                <p>₹{originalPrice.toLocaleString()}</p>
-                            </div>
-
-                            <div className="flex justify-between">
-                                <p>Discount</p>
-                                <p className="text-green-400">- ₹{discount.toLocaleString()}</p>
-                            </div>
-
-                            <div className="flex justify-between">
-                                <p>Delivery</p>
-                                <p className="text-green-400">Free</p>
-                            </div>
-
-                            <hr className="border-gray-500 my-3" />
-
-                            <div className="flex justify-between font-bold text-xl">
-                                <h4>Total Price</h4>
-                                <h4>₹{finalPrice.toLocaleString()}</h4>
-                            </div>
-                        </div>
-
-                        <button className="w-full bg-orange-600 py-3 rounded text-lg font-bold mt-6">
-                            Checkout
-                        </button>
-                    </div>
-
-                    {/* ---------------- Cart Items ---------------- */}
-                    <div className="sm:w-2/3 max-h-[75vh] overflow-y-auto pr-2">
+                    {/* CART ITEMS - LEFT */}
+                    <div className="md:w-2/3 max-h-[75vh] overflow-y-auto pr-2">
                         {cart.map((item) => (
                             <div key={item.id} className="w-full pb-6">
                                 <div className="flex flex-col sm:flex-row items-center gap-6">
@@ -128,6 +108,42 @@ const Cart = () => {
                         ))}
                     </div>
 
+                    {/* ORDER SUMMARY - RIGHT */}
+                    <div className="md:w-1/3 bg-neutral-800 rounded-lg p-5 h-fit sticky top-28">
+                        <h4 className="text-xl font-bold">
+                            Order Summary ({cart.length} items)
+                        </h4>
+
+                        <div className="mt-6 space-y-3 text-lg">
+                            <div className="flex justify-between">
+                                <p>Original Price</p>
+                                <p>₹{originalPrice.toLocaleString()}</p>
+                            </div>
+
+                            <div className="flex justify-between">
+                                <p>Discount</p>
+                                <p className="text-green-400">
+                                    - ₹{discount.toLocaleString()}
+                                </p>
+                            </div>
+
+                            <div className="flex justify-between">
+                                <p>Delivery</p>
+                                <p className="text-green-400">Free</p>
+                            </div>
+
+                            <hr className="border-gray-500 my-3" />
+
+                            <div className="flex justify-between font-bold text-xl">
+                                <h4>Total Price</h4>
+                                <h4>₹{finalPrice.toLocaleString()}</h4>
+                            </div>
+                        </div>
+
+                        <button className="w-full bg-orange-600 py-3 rounded text-lg font-bold mt-6 hover:bg-orange-700 transition">
+                            Checkout
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

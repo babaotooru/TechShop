@@ -80,7 +80,7 @@ export default function Carousel() {
                             {/* RIGHT IMAGE */}
                             <div className="w-full md:w-[45%] flex justify-center md:justify-end">
                                 <img
-                                    src={item.images}  // Correct (your images are strings)
+                                    src={item.images}
                                     alt={item.title}
                                     className="
                                         w-full md:h-[520px] h-[340px] object-contain
