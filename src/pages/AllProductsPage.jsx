@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 
@@ -9,6 +9,11 @@ import { globalContext } from "../mycontext/MyContext";
 
 const ProductCard = ({ item }) => {
     const dispatch = useDispatch();
+    const cart = useSelector(state => state.cartItems.cart);
+    const isAdded = cart.some(cartItem => cartItem.id === item.id);
+    const [addedTemp, setAddedTemp] = useState(false);
+
+
 
     return (
         <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-4 transition hover:border-red-600 hover:scale-[1.02] duration-300 ">
@@ -37,9 +42,15 @@ const ProductCard = ({ item }) => {
                 </div>
 
                 <button
-                    className="w-full bg-red-600 hover:bg-red-700 py-2 rounded-lg text-white font-semibold transition"
+                    className={`w-full py-2 rounded-lg font-semibold transition
+        ${addedTemp
+                            ? "bg-green-600 text-white"
+                            : "bg-red-600 hover:bg-red-700 text-white"
+                        }`}
                     onClick={() => {
                         dispatch(addToCart(item));
+
+                        setAddedTemp(true); // turn green
                         toast.success("✅ Added to cart", {
                             position: "top-right",
                             autoClose: 2000,
@@ -50,10 +61,18 @@ const ProductCard = ({ item }) => {
                                 zIndex: 9999,
                             },
                         });
+
+                        // After 2 seconds revert button
+                        setTimeout(() => {
+                            setAddedTemp(false);
+                        }, 500);
                     }}
                 >
-                    <i className="fas fa-shopping-cart mr-2"></i> Add to Cart
+                    <i className="fas fa-shopping-cart mr-2"></i>
+                    {addedTemp ? "Added ✅" : "Add to Cart"}
                 </button>
+
+
             </div>
         </div>
     );
