@@ -27,7 +27,7 @@ const Header = () => {
     return (
         <>
             {/* Navbar */}
-            <nav className=" fixed top-0 left-0 w-full bg-black text-white px-4 py-3">
+            <nav className=" fixed top-0 left-0 w-full z-[9999] bg-black text-white px-4 py-3">
                 <div className="flex justify-between items-center flex-wrap">
                     <a href="/" className="text-xl font-bold">
                         Tech-Shop

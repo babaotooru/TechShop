@@ -7,15 +7,11 @@ import { toast } from "react-toastify";
 import { addToCart } from "../ReduxStore/productSlice";
 import { globalContext } from "../mycontext/MyContext";
 
-
-// --------------------------------------------------
-// ⭐ PRODUCT CARD
-// --------------------------------------------------
 const ProductCard = ({ item }) => {
     const dispatch = useDispatch();
 
     return (
-        <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-4 transition hover:border-red-600 hover:scale-[1.02] duration-300">
+        <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-4 transition hover:border-red-600 hover:scale-[1.02] duration-300 relative z-10 ">
 
             <Link to={`/product/${item.id}`}>
                 <img
@@ -44,7 +40,16 @@ const ProductCard = ({ item }) => {
                     className="w-full bg-red-600 hover:bg-red-700 py-2 rounded-lg text-white font-semibold transition"
                     onClick={() => {
                         dispatch(addToCart(item));
-                        toast.success(`${item.title} added to cart!`);
+                        toast.success("✅ Added to cart", {
+                            position: "top-right",
+                            autoClose: 2000,
+                            pauseOnHover: true,
+                            draggable: true,
+                            style: {
+                                marginTop: "80px",
+                                zIndex: 9999,
+                            },
+                        });
                     }}
                 >
                     <i className="fas fa-shopping-cart mr-2"></i> Add to Cart
@@ -54,11 +59,6 @@ const ProductCard = ({ item }) => {
     );
 };
 
-
-
-// --------------------------------------------------
-// ⭐ SIDEBAR FILTERS
-// --------------------------------------------------
 const Sidebar = ({ setSort, filters, setFilters, priceRange, setPriceRange }) => {
     const handleCheck = (type, value) => {
         setFilters(prev => ({
@@ -132,11 +132,6 @@ const Sidebar = ({ setSort, filters, setFilters, priceRange, setPriceRange }) =>
     );
 };
 
-
-
-// --------------------------------------------------
-// ⭐ MAIN PAGE
-// --------------------------------------------------
 const AllProductsPage = () => {
     const { data } = useContext(globalContext);
 
@@ -163,7 +158,7 @@ const AllProductsPage = () => {
     }, [data, sort, filters, priceRange]);
 
     return (
-        <div className="bg-black min-h-screen text-white flex">
+        <div className="bg-black min-h-screen text-white flex overflow-y-auto">
 
             {/* LEFT SIDEBAR */}
             <Sidebar

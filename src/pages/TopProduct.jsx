@@ -37,9 +37,12 @@ const TopProducts = () => {
             autoClose: 2000,
             pauseOnHover: true,
             draggable: true,
+            style: {
+                marginTop: "90px",
+                zIndex: 9999,
+            },
         });
     };
-
 
     return (
         <div className="w-full px-4 bg-neutral-900 pb-10">
@@ -116,6 +119,7 @@ const TopProducts = () => {
                 {activeCategory === "All" && (
                     <Link
                         to="/Allproducts"
+                        onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
                         className="bg-neutral-800 rounded-xl border border-gray-700 flex flex-col items-center justify-center text-white text-center p-6 hover:bg-neutral-700 transition"
                     >
                         <h2 className="text-xl font-semibold">
@@ -125,7 +129,6 @@ const TopProducts = () => {
                         </h2>
                     </Link>
                 )}
-
             </div>
         </div>
     );

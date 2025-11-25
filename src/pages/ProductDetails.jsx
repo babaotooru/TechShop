@@ -107,7 +107,16 @@ const ProductDetails = () => {
                     <button
                         onClick={() => {
                             dispatch(addToCart(product));
-                            toast.success(`${product.title} added to cart!`);
+                            toast.success("✅ Added to cart", {
+                                position: "top-right",
+                                autoClose: 2000,
+                                pauseOnHover: true,
+                                draggable: true,
+                                style: {
+                                    marginTop: "80px",
+                                    zIndex: 9999,
+                                },
+                            });
                         }}
                         className="mt-4 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg text-lg font-bold transition"
                     >

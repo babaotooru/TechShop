@@ -16,7 +16,6 @@ const Cart = () => {
     return (
         <div className="w-full min-h-screen bg-black text-white px-4 py-6">
             {cart.length === 0 ? (
-                /* --------------------- EMPTY CART --------------------- */
                 <div className="flex flex-col items-center justify-center mt-10">
                     <BsCartX className="text-red-600 text-[150px] mb-6" />
                     <h1 className="text-4xl font-bold text-center">Your cart is empty</h1>
@@ -29,10 +28,9 @@ const Cart = () => {
                     </Link>
                 </div>
             ) : (
-                /* --------------------- CART ITEMS + ORDER SUMMARY --------------------- */
+
                 <div className="flex flex-col sm:flex-row gap-6 justify-center mt-4">
 
-                    {/* ---------------- Order Summary ---------------- */}
                     <div className="sm:w-1/3 bg-neutral-800 rounded-lg p-5 h-fit">
                         <h4 className="text-xl font-bold">
                             Order Summary ({cart.length} items)
