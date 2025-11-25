@@ -107,10 +107,9 @@ const TopProducts = () => {
                     </div>
                 ))}
 
-                {/* EXTRA CARD - Browse All */}
                 {activeCategory === "All" && (
                     <Link
-                        to="/Allproduct"
+                        to="/Allproducts"
                         className="bg-neutral-800 rounded-xl border border-gray-700 flex flex-col items-center justify-center text-white text-center p-6 hover:bg-neutral-700 transition"
                     >
                         <h2 className="text-xl font-semibold">
@@ -120,6 +119,7 @@ const TopProducts = () => {
                         </h2>
                     </Link>
                 )}
+
             </div>
         </div>
     );

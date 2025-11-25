@@ -18,7 +18,7 @@ export default function Navigation() {
                 <Route path='/Allproducts' element={<AllProductsPage />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
             </Routes>
-            <AllProductsPage />
+            {/* <AllProductsPage /> */}
             <Services />
             <Footer />
         </>
