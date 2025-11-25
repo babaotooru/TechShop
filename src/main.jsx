@@ -9,7 +9,7 @@ import { store } from './ReduxStore/store.js'
 import MyContext from './mycontext/MyContext.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/TechShop">
+    <BrowserRouter>
       <MyContext>
         <Provider store={store}>
           <App />
