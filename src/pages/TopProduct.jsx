@@ -32,8 +32,14 @@ const TopProducts = () => {
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product));
-        toast.success(`${product.title} added to cart!`);
+        toast.success("✅ Added to cart", {
+            position: "top-right",
+            autoClose: 2000,
+            pauseOnHover: true,
+            draggable: true,
+        });
     };
+
 
     return (
         <div className="w-full px-4 bg-neutral-900 pb-10">

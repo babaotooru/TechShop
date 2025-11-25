@@ -21,7 +21,7 @@ const Cart = () => {
                     <BsCartX className="text-red-600 text-[150px] mb-6" />
                     <h1 className="text-4xl font-bold text-center">Your cart is empty</h1>
 
-                    <Link to="/Allproduct" className="mt-8">
+                    <Link to="/Allproducts" className="mt-8">
                         <button className="bg-red-600 text-white flex items-center gap-4 px-8 py-4 rounded-xl text-2xl font-bold">
                             <FaArrowLeftLong />
                             Continue Shopping

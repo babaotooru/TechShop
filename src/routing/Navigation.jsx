@@ -7,10 +7,12 @@ import Cart from '../pages/Cart'
 import Services from '../components/Services'
 import AllProductsPage from '../pages/AllProductsPage'
 import ProductDetails from '../pages/ProductDetails'
+import { ToastContainer } from 'react-toastify'
 
 export default function Navigation() {
     return (
         <>
+            <ToastContainer position="top-right" autoClose={2000} />
             <Navbar />
             <Routes>
                 <Route path='/' element={<Home />} />
