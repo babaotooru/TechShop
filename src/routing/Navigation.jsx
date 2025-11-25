@@ -14,12 +14,14 @@ export default function Navigation() {
         <>
             <ToastContainer position="top-right" autoClose={2000} />
             <Navbar />
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/Allproducts' element={<AllProductsPage />} />
-                <Route path="/product/:id" element={<ProductDetails />} />
-            </Routes>
+            <div className='mt-10'>
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/cart' element={<Cart />} />
+                    <Route path='/Allproducts' element={<AllProductsPage />} />
+                    <Route path="/product/:id" element={<ProductDetails />} />
+                </Routes>
+            </div>
             {/* <AllProductsPage /> */}
             <Services />
             <Footer />
