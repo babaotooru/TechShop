@@ -4,30 +4,35 @@ import { Link } from "react-router-dom";
 // Slide content
 const slides = [
     {
+        id: 8,
         img: "/images/products/jbl760nc-1.png",
         title: "JBL Tune 760NC",
         price: "5,999",
         old: "7,999",
     },
     {
+        id: 14,
         img: "/images/products/boat203-1.png",
         title: "boAt Airdopes 203",
         price: "1,074",
         old: "3,999",
     },
     {
+        id: 2,
         img: "/images/products/boat518-1.png",
         title: "boAt Rockerz 518",
         price: "1,299",
         old: "3,999",
     },
     {
+        id: 9,
         img: "/images/products/boat255r-1.png",
         title: "boAt Rockerz 255",
         price: "899",
         old: "2,999",
     },
     {
+        id: 13,
         img: "/images/products/jbl-endu-1.png",
         title: "JBL Endurance Run",
         price: "999",
@@ -68,42 +73,42 @@ export default function Slider() {
             <div className="flex justify-center items-center gap-6 md:gap-10 overflow-hidden">
 
                 {visibleSlides.map((item, i) => {
-                    // center index = 2
-                    const isCenter = i === 2;
+                    const isCenter = i === 2; // center slide index
 
                     return (
                         <div
                             key={i}
-                            className={`
-      text-center transition-all duration-500
-      w-[110px] sm:w-[140px] md:w-[160px] lg:w-[200px]
-      ${isCenter ? "opacity-100  " : "opacity-70 "}
-    `}
+                            className={`text-center transition-all duration-500
+                                w-[110px] sm:w-[140px] md:w-[160px] lg:w-[200px]
+                                ${isCenter ? "opacity-100" : "opacity-70"}
+                            `}
                         >
 
+                            {/* Title */}
                             <p className={`text-white text-sm sm:text-base mb-20 transition-all duration-500
-      ${isCenter ? "scale-150" : "scale-110"}
-    `}>
+                                ${isCenter ? "scale-150" : "scale-75"}
+                            `}>
                                 {item.title}
                             </p>
 
-                            <Link to="/Allproduct">
+                            {/* Image */}
+                            <Link to={`/product/${item.id}`}>
                                 <img
                                     src={item.img}
                                     alt={item.title}
                                     className={`
-          mx-auto object-contain 
-          h-24 sm:h-28 md:h-32 lg:h-40
-          transition-transform duration-500
-          ${isCenter ? "scale-200" : "scale-100"}
-        `}
+                                        mx-auto object-contain 
+                                        h-24 sm:h-28 md:h-32 lg:h-40
+                                        transition-transform duration-500
+                                        ${isCenter ? "scale-200" : "scale-100"}
+                                    `}
                                 />
                             </Link>
 
-                            <p className={`
-      text-white text-base sm:text-lg font-semibold mt-20 transition-all duration-500
-      ${isCenter ? "scale-150" : "scale-110"}
-    `}>
+                            {/* Price */}
+                            <p className={`text-white text-base sm:text-lg font-semibold mt-20 transition-all duration-500
+                                ${isCenter ? "scale-150" : "scale-75"}
+                            `}>
                                 ₹{item.price}
                                 <span className="text-gray-500 ml-2 text-sm line-through">
                                     ₹{item.old}
@@ -112,7 +117,6 @@ export default function Slider() {
 
                         </div>
                     );
-
                 })}
 
             </div>
@@ -123,10 +127,10 @@ export default function Slider() {
                     <span
                         key={i}
                         className={`
-              w-3 h-3 rounded-full 
-              ${i === index ? "bg-red-600 scale-125" : "bg-gray-500"} 
-              transition-all duration-300
-            `}
+                            w-3 h-3 rounded-full 
+                            ${i === index ? "bg-red-600 scale-125" : "bg-gray-500"} 
+                            transition-all duration-300
+                        `}
                     ></span>
                 ))}
             </div>
