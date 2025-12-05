@@ -13,15 +13,26 @@ const productSlice = createSlice({
     initialState: { cart: loadCart() },
     reducers: {
         addToCart: (state, { payload }) => {
-            const item = state.cart.find(i => i.id === payload.id);
+        const item = state.cart.find(i => i.id === payload.id);
 
-            if (!item) {
-                state.cart.push({ ...payload, quantity: 1 });
-            }
-        },
-        removeFromCart: (state, { payload }) => {
-            state.cart = state.cart.filter(i => i.id !== payload.id);
-        },
+        if (item) {
+            item.quantity += 1;  
+        } else {
+            state.cart.push({ ...payload, quantity: 1 }); 
+        }
+    },
+        removeFromCart: (state, action) => {
+    const item = state.cart.find(p => p.id === action.payload.id);
+
+    if (item) {
+        if (item.quantity > 1) {
+            item.quantity -= 1;   
+        } else {
+            state.cart = state.cart.filter(p => p.id !== action.payload.id);  
+           
+        }
+    }
+},
         increaseQty: (state, { payload }) => {
             const item = state.cart.find(i => i.id === payload.id);
             if (item) item.quantity++;

@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react";
-
 import { useDispatch } from "react-redux";
-
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { addToCart } from "../ReduxStore/productSlice";
@@ -12,7 +10,6 @@ const TopProducts = () => {
     const { data } = useContext(globalContext);
     const dispatch = useDispatch();
     const [tempAdded, setTempAdded] = useState({});
-
 
     const categories = ["All", "Headphones", "Earbuds", "Earphones", "Neckbands"];
 
@@ -59,11 +56,11 @@ const TopProducts = () => {
                         key={category}
                         onClick={() => setActiveCategory(category)}
                         className={`px-5 py-2 rounded-full text-white border transition-all
-              ${activeCategory === category
+                            ${activeCategory === category
                                 ? "bg-red-600 border-red-700 shadow-lg scale-105"
                                 : "border-gray-500 hover:bg-gray-700"
                             }
-            `}
+                        `}
                     >
                         {category}
                     </button>
@@ -75,7 +72,7 @@ const TopProducts = () => {
                 {displayedProducts.map((product) => (
                     <div
                         key={product.id}
-                        className="bg-neutral-800 rounded-xl shadow-lg p-4 border border-gray-700 hover:shadow-xl transition-all"
+                        className="bg-neutral-800 rounded-xl shadow-lg p-4 border border-gray-700 hover:shadow-xl transition-all flex flex-col h-full"
                     >
                         <Link to={`/product/${product.id}`}>
                             <img
@@ -86,7 +83,7 @@ const TopProducts = () => {
                         </Link>
 
                         {/* PRODUCT INFO */}
-                        <div className="mt-3">
+                        <div className="mt-3 flex-grow">
                             {/* Rating */}
                             <div className="flex text-yellow-400 mb-1">
                                 {[...Array(5)].map((_, i) => (
@@ -105,29 +102,28 @@ const TopProducts = () => {
                                     ₹{product.originalPrice}
                                 </span>
                             </h4>
-
-                            <button
-                                onClick={() => {
-                                    handleAddToCart(product);
-
-                                    // Make button green temporarily
-                                    setTempAdded(prev => ({ ...prev, [product.id]: true }));
-
-                                    setTimeout(() => {
-                                        setTempAdded(prev => ({ ...prev, [product.id]: false }));
-                                    }, 500);
-                                }}
-                                className={`mt-3 px-4 py-2 w-full rounded-lg flex items-center justify-center gap-2 text-sm font-semibold transition
-        ${tempAdded[product.id]
-                                        ? "bg-green-600 text-white"
-                                        : "bg-red-600 hover:bg-red-700 text-white"
-                                    }`}
-                            >
-                                <i className="fa-solid fa-cart-shopping text-sm"></i>
-                                {tempAdded[product.id] ? "Added ✅" : "Add to Cart"}
-                            </button>
-
                         </div>
+
+                        {/* ADD TO CART BUTTON - Always Bottom */}
+                        <button
+                            onClick={() => {
+                                handleAddToCart(product);
+
+                                setTempAdded(prev => ({ ...prev, [product.id]: true }));
+                                setTimeout(() => {
+                                    setTempAdded(prev => ({ ...prev, [product.id]: false }));
+                                }, 500);
+                            }}
+                            className={`mt-auto px-4 py-3 w-full rounded-lg flex items-center justify-center gap-2 text-sm font-semibold transition
+                                ${tempAdded[product.id]
+                                    ? "bg-green-600 text-white"
+                                    : "bg-red-600 hover:bg-red-700 text-white"
+                                }`}
+                        >
+                            <i className="fa-solid fa-cart-shopping text-sm"></i>
+                            {tempAdded[product.id] ? "Added ✅" : "Add to Cart"}
+                        </button>
+
                     </div>
                 ))}
 

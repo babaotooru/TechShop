@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { addToCart, removeFromCart } from "../ReduxStore/productSlice";
 import { globalContext } from "../mycontext/MyContext";
 
-/* ---------------- PRODUCT CARD ---------------- */
 const ProductCard = ({ item }) => {
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cartItems.cart);
@@ -25,7 +24,9 @@ const ProductCard = ({ item }) => {
     };
 
     return (
-        <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-4 transition hover:border-red-600 hover:scale-[1.02] duration-300">
+        <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-4 
+                        transition hover:border-red-600 hover:scale-[1.02] duration-300 
+                        flex flex-col h-full">
 
             <Link to={`/product/${item.id}`}>
                 <img
@@ -35,18 +36,20 @@ const ProductCard = ({ item }) => {
                 />
             </Link>
 
-            <h3 className="text-white font-semibold text-lg">{item.title}</h3>
-            <p className="text-gray-400 text-sm">{item.info}</p>
+            <div className="flex-grow">
+                <h3 className="text-white font-semibold text-lg">{item.title}</h3>
+                <p className="text-gray-400 text-sm">{item.info}</p>
 
-            <div className="flex items-center gap-2 mt-2 mb-3">
-                <span className="text-white font-bold text-lg">₹{item.finalPrice}</span>
-                <span className="line-through text-gray-500 text-sm">₹{item.originalPrice}</span>
+                <div className="flex items-center gap-2 mt-2 mb-3">
+                    <span className="text-white font-bold text-lg">₹{item.finalPrice}</span>
+                    <span className="line-through text-gray-500 text-sm">₹{item.originalPrice}</span>
+                </div>
             </div>
 
             <button
                 onClick={handleAdd}
-                className={`w-full py-2 rounded-lg font-semibold transition ${addedTemp ? "bg-green-600" : "bg-red-600 hover:bg-red-700"
-                    }`}
+                className={`w-full py-2 rounded-lg font-semibold transition mt-auto 
+                            ${addedTemp ? "bg-green-600" : "bg-red-600 hover:bg-red-700"}`}
             >
                 {addedTemp ? "Added ✅" : "Add to Cart"}
             </button>
@@ -55,7 +58,7 @@ const ProductCard = ({ item }) => {
 };
 
 
-/* ---------------- SIDEBAR ---------------- */
+
 const Sidebar = ({ setSort, filters, setFilters, priceRange, setPriceRange, clearAll }) => {
 
     const handleCheck = (type, value) => {
@@ -70,7 +73,6 @@ const Sidebar = ({ setSort, filters, setFilters, priceRange, setPriceRange, clea
     return (
         <div className="w-full lg:w-64 bg-neutral-900 border-r border-neutral-700 p-5 space-y-6">
 
-            {/* ✅ CLEAR FILTER BUTTON */}
             <button
                 onClick={clearAll}
                 className="w-full bg-red-600 hover:bg-red-700 py-2 rounded font-bold"
@@ -130,7 +132,6 @@ const Sidebar = ({ setSort, filters, setFilters, priceRange, setPriceRange, clea
 };
 
 
-/* ---------------- MAIN PAGE ---------------- */
 const AllProductsPage = () => {
     const { data } = useContext(globalContext);
     const dispatch = useDispatch();
@@ -140,7 +141,6 @@ const AllProductsPage = () => {
     const [filters, setFilters] = useState({ brand: [], category: [] });
     const [priceRange, setPriceRange] = useState(20000);
 
-    // ✅ CLEAR ALL FUNCTION
     const clearAll = () => {
         setFilters({ brand: [], category: [] });
         setSort(null);

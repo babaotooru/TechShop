@@ -7,7 +7,7 @@ import { globalContext } from "../mycontext/MyContext";
 
 const Header = () => {
     const cart = useSelector((state) => state.cartItems.cart);
-    const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+    const cartCount = cart.length;
 
     const { data: products } = useContext(globalContext);
 
