@@ -75,12 +75,15 @@ export default function Slider() {
                         <div
                             key={i}
                             className={`
-                text-center transition-all duration-500 
-                ${isCenter ? "scale-150 opacity-100" : "scale-90 opacity-70"}
-                w-[110px] sm:w-[140px] md:w-[160px] lg:w-[200px]
-              `}
+      text-center transition-all duration-500
+      w-[110px] sm:w-[140px] md:w-[160px] lg:w-[200px]
+      ${isCenter ? "opacity-100  " : "opacity-70 "}
+    `}
                         >
-                            <p className="text-white text-sm sm:text-base mb-2">
+
+                            <p className={`text-white text-sm sm:text-base mb-20 transition-all duration-500
+      ${isCenter ? "scale-150" : "scale-110"}
+    `}>
                                 {item.title}
                             </p>
 
@@ -88,28 +91,34 @@ export default function Slider() {
                                 <img
                                     src={item.img}
                                     alt={item.title}
-                                    className="
-                    mx-auto object-contain 
-                    h-24 sm:h-28 md:h-32 lg:h-40 
-                    transition-transform duration-300 hover:scale-110
-                  "
+                                    className={`
+          mx-auto object-contain 
+          h-24 sm:h-28 md:h-32 lg:h-40
+          transition-transform duration-500
+          ${isCenter ? "scale-200" : "scale-100"}
+        `}
                                 />
                             </Link>
 
-                            <p className="text-white text-base sm:text-lg font-semibold mt-2">
+                            <p className={`
+      text-white text-base sm:text-lg font-semibold mt-20 transition-all duration-500
+      ${isCenter ? "scale-150" : "scale-110"}
+    `}>
                                 ₹{item.price}
                                 <span className="text-gray-500 ml-2 text-sm line-through">
                                     ₹{item.old}
                                 </span>
                             </p>
+
                         </div>
                     );
+
                 })}
 
             </div>
 
             {/* Pagination Dots */}
-            <div className="flex justify-center mt-6 gap-3">
+            <div className="flex justify-center mt-10 gap-3">
                 {slides.map((_, i) => (
                     <span
                         key={i}
